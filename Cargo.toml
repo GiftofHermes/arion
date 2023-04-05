@@ -1,0 +1,15 @@
+[package]
+name = "arion"
+version = "0.1.0"
+edition = "2021"
+description = "Local search operators for vehicle routing problems"
+readme = "README.md"
+repository = "https://github.com/GiftofHermes/arion"
+license = "Apache-2.0"
+keywords = ["search", "local", "optimization", "vehicle", "routing"]
+categories = ["Algorithms"]
+
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
