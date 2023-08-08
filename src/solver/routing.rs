@@ -75,7 +75,7 @@ pub struct SolvedProblem {
 }
 
 impl SolvedProblem { 
-    pub fn improve(self, sequence: Vec<Operator>) -> SolvedProblem { 
+    pub fn improve(self, _sequence: Vec<Operator>) -> SolvedProblem { 
         todo!()
     }
 }
