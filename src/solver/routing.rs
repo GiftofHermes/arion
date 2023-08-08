@@ -53,7 +53,7 @@ impl Problem {
         demands.sort_by(|a, b| b.cmp(a));
         capacities.sort_by(|a, b| b.cmp(a));
         
-        let mut put_in_bin = false;
+        let mut put_in_bin: bool;
         for demand in demands { 
             put_in_bin = false;
             for capacity in capacities.iter_mut() { 
