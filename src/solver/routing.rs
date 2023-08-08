@@ -6,10 +6,29 @@ pub struct Location {
     demand: i64, 
 }
 
+impl Location { 
+    pub fn new(x:f32, y:f32, demand: i64) -> Self { 
+        Location {
+            x, 
+            y,
+            demand
+        }
+    }
+}
+
 pub struct Vehicle {
     name: String,
     capacity: i64, // capacity should be more general and be able to include things like volume of items, not just weight. 
     // capacity also should be optional to use.
+}
+
+impl Vehicle { 
+    pub fn new(name: String, capacity: i64) -> Self { 
+        Vehicle { 
+            name, 
+            capacity
+        }
+    }
 }
 
 pub struct Route {
@@ -36,6 +55,13 @@ pub struct Problem {
 }
 
 impl Problem { 
+    pub fn new(vehicles: Vec<Vehicle>, destinations: Vec<Location>) -> Self { 
+        Problem { 
+            vehicles, 
+            destinations
+        }
+    }
+
     pub fn solve(self) -> SolvedProblem { 
         todo!()
     }
@@ -57,9 +83,11 @@ impl Problem {
         for demand in demands { 
             put_in_bin = false;
             for capacity in capacities.iter_mut() { 
+                dbg!(&demand, &capacity);
                 if demand <= *capacity { 
                     *capacity -= demand;
                     put_in_bin = true;
+                    break;
                 }
             }
             if !put_in_bin { 
