@@ -1,5 +1,5 @@
 use arion;
-use arion::solver::routing::{Vehicle, Location, Problem};
+use arion::routing::{Vehicle, Location, Problem};
 
 #[test]
 fn it_is_solvable()  {
