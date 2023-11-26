@@ -1,6 +1,6 @@
 use std::cmp::Ordering;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Location {
     pub(crate) x: f32,
     pub(crate) y: f32,

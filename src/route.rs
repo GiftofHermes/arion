@@ -18,10 +18,20 @@ impl Route {
             destinations: Vec::new()
         }
     }
-    fn cost(self) -> f32 { 
+    pub fn cost(&self) -> f32 { 
         self.destinations
             .windows(2)
             .map(|slice| {calculate_distance(&slice[0], &slice[1])})
             .sum()
+    }
+
+    pub fn is_feasible(&self) -> bool { 
+        let mut capacity = self.vehicle.capacity;
+
+        for destination in self.destinations { 
+            capacity =- destination.demand;
+        }
+
+        capacity >= 0
     }
 }

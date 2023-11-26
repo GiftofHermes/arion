@@ -95,20 +95,35 @@ impl SolvedProblem {
         }
     }
     
-    pub fn intra_opt(n: usize) -> SolvedProblem { 
+    pub fn intra_two_opt(self) -> SolvedProblem { 
+        fn two_opt(mut route: Route) -> Route {
+            let n_nodes = 2;
+            let mut best_cost = route.cost();
+            for i in 0..route.destinations.len()-n_nodes {
+                let mut candidate_route_destinations = route.destinations.clone();
+                candidate_route_destinations.swap(i, i+n_nodes);
+                
+                std::mem::swap(&mut route.destinations, &mut candidate_route_destinations);
+                let cost = route.cost();
+                if cost < best_cost { 
+                    best_cost = cost;
+                } else {
+                    std::mem::swap(&mut route.destinations, &mut candidate_route_destinations);
+                }
+            }
+            route
+         }
+
+        for route in self.routes.iter_mut() { 
+            *route = two_opt(route)
+        }
+
+        self
+    }
+
+    pub fn intra_three_opt(self) -> SolvedProblem { 
         todo!()
     }
 
-    pub fn intra_exchange(n: usize) -> SolvedProblem { 
-        todo!()
-    }
-
-    pub fn inter_opt(n: usize) -> SolvedProblem { 
-        todo!()
-    }
-
-    pub fn inter_exchange(n: usize) -> SolvedProblem { 
-        todo!()
-    }
 
 }
