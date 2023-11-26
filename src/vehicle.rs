@@ -1,4 +1,5 @@
 use std::cmp::Ordering;
+use std::fmt;
 
 #[derive(Debug)]
 pub struct Vehicle {
@@ -13,6 +14,12 @@ impl Vehicle {
             name, 
             capacity
         }
+    }
+}
+
+impl fmt::Display for Vehicle {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "({}, {})", self.name, self.capacity)
     }
 }
 
