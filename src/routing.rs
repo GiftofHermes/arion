@@ -18,7 +18,39 @@ impl UnsolvedProblem {
     }
 
     pub fn initial_solution(self) -> Result<SolvedProblem, InfeasableProblem> { 
-        todo!()
+        if !self.solvable() { 
+            return Err(InfeasableProblem)
+        }
+
+        let mut routes: Vec<Route> = Vec::new();
+        let mut destinations = self.destinations;
+        let mut vehicles = self.vehicles;
+
+        destinations.sort_by(|a, b| b.cmp(a));        
+        vehicles.sort_by(|a, b| b.cmp(a));        
+        
+        for vehicle in vehicles {
+            let mut route = Route::new(vehicle);
+
+            let mut remainder = Vec::new();
+            for destination in destinations.into_iter() { 
+                
+                if destination.demand <= route.vehicle.capacity { 
+                    dbg!(&route.vehicle);
+                    route.vehicle.capacity -= destination.demand;
+                    route.destinations.push(destination)
+                } else { 
+                    remainder.push(destination)
+                }
+            }
+            destinations = remainder;
+
+            routes.push(route)
+        }
+
+        dbg!(&routes);
+
+        Ok(SolvedProblem::new(routes))
     }
 
     /// https://en.wikipedia.org/wiki/First-fit-decreasing_bin_packing
@@ -27,7 +59,7 @@ impl UnsolvedProblem {
     /// For each item from largest to smallest, find the first bin into which the item fits, if any.
     /// If such a bin is found, put the new item in it.
     /// Otherwise, open a new empty bin put the new item in it.
-    pub fn solvable(self) -> bool {
+    pub fn solvable(&self) -> bool {
         let mut demands: Vec<i64> = self.destinations.iter().map(|location| &location.demand).copied().collect();
         let mut capacities: Vec<i64> = self.vehicles.iter().map(|vehicle| &vehicle.capacity).copied().collect();
 
@@ -58,6 +90,12 @@ pub struct SolvedProblem {
 }
 
 impl SolvedProblem { 
+    pub fn new(routes: Vec<Route>) -> SolvedProblem { 
+        SolvedProblem { 
+            routes: routes
+        }
+    }
+
     pub fn improve(self, _sequence: Vec<Operator>) -> SolvedProblem { 
         todo!()
     }

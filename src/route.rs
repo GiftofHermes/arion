@@ -1,10 +1,10 @@
 use crate::vehicle::Vehicle;
 use crate::location::Location;
 
-
+#[derive(Debug)]
 pub struct Route {
-    vehicle: Vehicle,
-    destinations: Vec<Location>,
+    pub vehicle: Vehicle,
+    pub destinations: Vec<Location>,
 }
 
 fn calculate_distance(a: &Location, b: &Location) -> f32 { 
@@ -12,6 +12,12 @@ fn calculate_distance(a: &Location, b: &Location) -> f32 {
 }
 
 impl Route { 
+    pub fn new(vehicle: Vehicle) -> Route { 
+        Route {
+            vehicle: vehicle, 
+            destinations: Vec::new()
+        }
+    }
     fn cost(self) -> f32 { 
         self.destinations
             .windows(2)

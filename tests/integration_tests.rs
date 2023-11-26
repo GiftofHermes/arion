@@ -22,3 +22,14 @@ fn not_solvable()  {
     
     assert!(!problem.solvable())
 }
+
+
+#[test]
+fn initial_solution()  {
+    let problem = UnsolvedProblem::new(
+        vec![Vehicle::new(String::from("0"), 10), Vehicle::new(String::from("1"), 12)],
+        vec![Location::new(10.0,10.0, 3), Location::new(10.0,10.0,7), Location::new(10.0,10.0,5)]
+    );
+
+    assert!(problem.initial_solution().is_ok())
+}
