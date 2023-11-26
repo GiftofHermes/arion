@@ -28,7 +28,7 @@ impl Route {
     pub fn is_feasible(&self) -> bool { 
         let mut capacity = self.vehicle.capacity;
 
-        for destination in self.destinations { 
+        for destination in &self.destinations { 
             capacity =- destination.demand;
         }
 

@@ -96,7 +96,7 @@ impl SolvedProblem {
     }
     
     pub fn intra_two_opt(mut self) -> SolvedProblem { 
-        fn two_opt(mut route: &mut Route) -> Route {
+        fn two_opt(route: &mut Route) {
             let n_nodes = 2;
             let mut best_cost = route.cost();
             for i in 0..route.destinations.len()-n_nodes {
@@ -111,11 +111,10 @@ impl SolvedProblem {
                     std::mem::swap(&mut route.destinations, &mut candidate_route_destinations);
                 }
             }
-            route
          }
 
         for route in self.routes.iter_mut() { 
-            *route = two_opt(route)
+            two_opt(route)
         }
 
         self
