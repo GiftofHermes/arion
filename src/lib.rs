@@ -1,4 +1,3 @@
-pub mod operator;
 pub mod routing;
 pub mod vehicle;
 pub mod route;

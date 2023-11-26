@@ -1,4 +1,3 @@
-use super::operator::Operator;
 use crate::vehicle::Vehicle;
 use crate::location::Location;
 use crate::route::Route;
@@ -95,8 +94,21 @@ impl SolvedProblem {
             routes: routes
         }
     }
-
-    pub fn improve(self, _sequence: Vec<Operator>) -> SolvedProblem { 
+    
+    pub fn intra_opt(n: usize) -> SolvedProblem { 
         todo!()
     }
+
+    pub fn intra_exchange(n: usize) -> SolvedProblem { 
+        todo!()
+    }
+
+    pub fn inter_opt(n: usize) -> SolvedProblem { 
+        todo!()
+    }
+
+    pub fn inter_exchange(n: usize) -> SolvedProblem { 
+        todo!()
+    }
+
 }
